@@ -1,0 +1,9 @@
+# Notes Sharing App
+Stack: Go (Fiber, GORM, JWT) + PostgreSQL + Next.js
+
+## How to run backend
+cd backend
+go run main.go
+
+## How to run database
+docker-compose up -d
