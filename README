@@ -89,7 +89,13 @@ Stack: Go (Fiber, GORM, JWT) + PostgreSQL + Next.js
     Remove unused Docker containers/images:
         docker system prune
 
+---
+
 💡 Note:
 Frontend deployed on Vercel currently points to local backend.
 Some features like register/login may not work on Vercel deployment.
 To fully test these features, run backend locally as described above.
+
+---
+
+App review :
