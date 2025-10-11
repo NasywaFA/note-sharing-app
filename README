@@ -101,4 +101,7 @@ Stack: Go (Fiber, GORM, JWT) + PostgreSQL + Next.js
 
 💡 Note: Frontend deployed on Vercel currently points to local backend. Some features like register/login may not work on Vercel deployment. To fully test these features, run backend locally as described above.
 
----
+💡 Note:
+Frontend deployed on Vercel currently points to local backend.
+Some features like register/login may not work on Vercel deployment.
+To fully test these features, run backend locally as described above.
