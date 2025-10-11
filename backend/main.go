@@ -18,7 +18,11 @@ func main() {
 	app := fiber.New()
 
 	// Logger middleware
-	app.Use(logger.New())
+	app.Use(logger.New(logger.Config{
+		Format:     "[${time}] ${method} ${path} - ${status}\n",
+		TimeFormat: "02-Jan-2006 15:04:05",
+		TimeZone:   "Local",
+	}))
 
 	// CORS middleware
 	app.Use(cors.New(cors.Config{
@@ -27,7 +31,7 @@ func main() {
 		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
 		AllowCredentials: true,
 	}))
-	
+
 	// Handle OPTIONS preflight
 	app.Options("*", func(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusOK)
