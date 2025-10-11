@@ -1,9 +1,75 @@
 # Notes Sharing App
 Stack: Go (Fiber, GORM, JWT) + PostgreSQL + Next.js
 
-## How to run backend
-cd backend
-go run main.go
+---
 
-## How to run database
-docker-compose up -d
+# 1️⃣ How to run backend
+    cd backend
+    go run main.go
+
+    Stop backend: tekan Ctrl + C
+
+# 2️⃣ How to run database (PostgreSQL)
+    Start all services in detached mode:
+        docker-compose up -d
+
+    Stop all services:
+        docker-compose down
+    
+    Rebuild & refresh containers (useful after changes):
+        docker-compose down
+        docker-compose up --build
+    
+    Access PostgreSQL inside container:
+        docker exec -it notesdb psql -U postgres -d notesdb
+
+    List databases:
+        \l
+    
+    Connect to a specific database:
+        \c notesdb
+
+    List tables:
+        \dt
+
+    View table content:
+        SELECT * FROM <table_name>;
+
+    Exit psql:
+        \q
+    
+# 3️⃣ How to run frontend
+        cd frontend
+        npm install
+        npm run dev
+    
+    Stop frontend: tekan Ctrl + C
+
+    Build & run for production:
+        npm run build
+        npm run start
+
+# 4️⃣ Viewing logs (live)
+    Backend logs:
+        docker-compose logs -f backend
+    
+    Frontend logs:
+        docker-compose logs -f frontend
+    
+    Database logs:
+        docker-compose logs -f postgres
+
+💡 Tip: Add --tail 100 to see 100 on behind.
+
+# 5️⃣ Additional tips
+    Check ports in use:
+        netstat -ano | findstr :<port_number>
+    
+    Kill a process by PID (Windows):
+        taskkill /PID <PID> /F
+    
+    List Docker containers:
+        docker ps -a
+    
+    Remove unused Docker containers/images:
+        docker system prune

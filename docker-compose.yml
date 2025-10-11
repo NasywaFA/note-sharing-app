@@ -1,13 +1,51 @@
-version: "3"
 services:
   postgres:
-    image: postgres:15
-    container_name: postgres-db
+    image: postgres:15-alpine
+    container_name: notesdb
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_PASSWORD: 279111
       POSTGRES_DB: notesdb
     ports:
       - "5433:5432"
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  backend:
+    build: ./backend
+    container_name: notes-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=279111
+      - DB_NAME=notesdb
+      - DB_PORT=5432
+      - JWT_SECRET=11092708
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+
+  frontend:
+    build: ./frontend
+    container_name: notes-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8080/api
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,22 @@
+# Environment
+.env
+*.env
+
+# Node & Next.js
+frontend/node_modules
+frontend/.next
+
+# Golang
+backend/bin
+backend/*.exe
+
+# Database data
+data/
+pg_data/
+
+# Docker
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
