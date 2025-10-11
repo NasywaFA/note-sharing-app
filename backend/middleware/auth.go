@@ -22,7 +22,7 @@ func AuthMiddleware(c *fiber.Ctx) error {
     token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
         secret := os.Getenv("JWT_SECRET")
         if secret == "" {
-            secret = "your-super-secret-key" // fallback
+            secret = "fallback-secret" // fallback
         }
         return []byte(secret), nil
     })

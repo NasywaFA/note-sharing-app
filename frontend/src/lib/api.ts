@@ -1,19 +1,20 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8080';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8080/api';
 
 const api = axios.create({
     baseURL: API_URL,
     headers: {
-    'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
     },
+    withCredentials: true,
 });
 
 api.interceptors.request.use((config) => {
     const token = Cookies.get('token');
     if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 });
@@ -21,8 +22,8 @@ api.interceptors.request.use((config) => {
 export interface User {
     id: number;
     username: string;
+    email: string;
 }
-
 export interface Note {
     ID: number;
     title: string;
@@ -39,16 +40,17 @@ export interface LoginResponse {
 }
 
 export const authAPI = {
-    register: async (username: string, password: string) => {
-    const response = await api.post('/register', { username, password });
-    return response.data;
+    register: async (username: string, email: string, password: string) => {
+        const response = await api.post('/register', { username, email, password });
+        return response.data;
     },
 
-    login: async (username: string, password: string): Promise<LoginResponse> => {
-    const response = await api.post<LoginResponse>('/login', { username, password });
-    return response.data;
+    login: async (login: string, password: string): Promise<LoginResponse> => {
+        const response = await api.post<LoginResponse>('/login', { login, password });
+        return response.data;
     },
 };
+
 
 export const notesAPI = {
     getAll: async (): Promise<Note[]> => {
@@ -62,19 +64,19 @@ export const notesAPI = {
     },
 
     create: async (title: string, content: string, imageURL?: string): Promise<Note> => {
-        const response = await api.post<Note>('/notes', { 
-            title, 
+        const response = await api.post<Note>('/notes', {
+            title,
             content,
-            image_url: imageURL || ''
+            image_url: imageURL || '',
         });
         return response.data;
     },
 
     update: async (id: number, title: string, content: string, imageURL?: string): Promise<Note> => {
-        const response = await api.put<Note>(`/notes/${id}`, { 
-            title, 
+        const response = await api.put<Note>(`/notes/${id}`, {
+            title,
             content,
-            image_url: imageURL || ''
+            image_url: imageURL || '',
         });
         return response.data;
     },

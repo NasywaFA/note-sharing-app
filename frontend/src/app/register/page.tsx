@@ -6,58 +6,64 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { UserPlus, AlertCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/context/AuthContext';
 
 export default function RegisterPage() {
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const { register } = useAuth();
 
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setIsLoading(true);
+        e.preventDefault();
+        setError('');
+        setIsLoading(true);
 
-    if (password !== confirmPassword) {
-        toast.error('Passwords do not match');
-        setIsLoading(false);
-        return;
-    }
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match');
+            setIsLoading(false);
+            return;
+        }
 
-    if (password.length < 6) {
-        toast.error('Password must be at least 6 characters');
-        setIsLoading(false);
-        return;
-    }
+        if (password.length < 6) {
+            toast.error('Password must be at least 6 characters');
+            setIsLoading(false);
+            return;
+        }
 
-    try {
-        await axios.post('http://127.0.0.1:8080/api/register', {
-            username,
-            password,
-        });
+        if (!email.includes('@') || !email.includes('.')) {
+            toast.error('Please enter a valid email');
+            setIsLoading(false);
+            return;
+        }
 
-        toast.success('Registration successful!');
-        router.push('/login');
-    } catch (err: unknown) {
-        let message = 'Registration failed, please try again';
+        try {
+            await register(username, email, password);
+            toast.success('Account created successfully!');
+            router.push('/login');
+        } catch (err: unknown) {
+            let message = 'Registration failed, please try again';
 
-        if (axios.isAxiosError(err)) {
-            message = (err.response?.data as { error?: string })?.error ?? err.message;
-            if (err.response?.status === 409) {
-                message = message || 'Username already exists';
-            }
+            if (axios.isAxiosError(err)) {
+                message = (err.response?.data as { error?: string })?.error ?? err.message;
+                if (err.response?.status === 409 && !message) {
+                    message = 'Username or email already exists';
+                }
             } else if (err instanceof Error) {
                 message = err.message;
             }
-        toast.error(message);
-        setError(message);
-    } finally {
-        setIsLoading(false);
-    }
-};
+
+            toast.error(message);
+            setError(message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -90,6 +96,20 @@ export default function RegisterPage() {
                         placeholder="Choose a username"
                         required
                         minLength={3}
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email
+                    </label>
+                    <input 
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                        placeholder="Email"
+                        required
                     />
                 </div>
 

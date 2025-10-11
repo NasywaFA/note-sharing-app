@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"backend/database"
@@ -13,27 +13,41 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// Register handler
 func Register(c *fiber.Ctx) error {
-	body := c.Body()
-	fmt.Printf("Raw Body: %s\n", string(body))
-	fmt.Printf("Content-Type: %s\n", c.Get("Content-Type"))
-
-	var input models.User
+	var input struct {
+		Username string `json:"username"`
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
 
 	if err := c.BodyParser(&input); err != nil {
-		fmt.Printf("Parse Error: %v\n", err)
 		return c.Status(400).JSON(fiber.Map{"error": "Invalid input"})
 	}
 
-	fmt.Printf("Parsed Input - Username: %s, Password: %s\n", input.Username, input.Password)
-
+	// Validation
 	if len(input.Username) < 3 {
-		return c.Status(400).JSON(fiber.Map{"error": "Username min 3 characters"})
+		return c.Status(400).JSON(fiber.Map{"error": "Username must be at least 3 characters"})
 	}
 	if len(input.Password) < 6 {
-		return c.Status(400).JSON(fiber.Map{"error": "Password min 6 characters"})
+		return c.Status(400).JSON(fiber.Map{"error": "Password must be at least 6 characters"})
+	}
+	if !strings.Contains(input.Email, "@") || !strings.Contains(input.Email, ".") {
+		return c.Status(400).JSON(fiber.Map{"error": "Invalid email format"})
 	}
 
+	// Cek duplicate username
+	var existingUser models.User
+	if err := database.DB.Where("username = ?", input.Username).First(&existingUser).Error; err == nil {
+		return c.Status(409).JSON(fiber.Map{"error": "Username already taken"})
+	}
+
+	// Cek duplicate email
+	if err := database.DB.Where("email = ?", input.Email).First(&existingUser).Error; err == nil {
+		return c.Status(409).JSON(fiber.Map{"error": "Email already registered"})
+	}
+
+	// Hash password
 	hashed, err := bcrypt.GenerateFromPassword([]byte(input.Password), 10)
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"error": "Failed to hash password"})
@@ -41,6 +55,7 @@ func Register(c *fiber.Ctx) error {
 
 	user := models.User{
 		Username: input.Username,
+		Email:    input.Email,
 		Password: string(hashed),
 	}
 
@@ -51,9 +66,10 @@ func Register(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{"message": "User registered successfully"})
 }
 
+// Login handler
 func Login(c *fiber.Ctx) error {
 	var input struct {
-		Username string `json:"username"`
+		Login    string `json:"login"`
 		Password string `json:"password"`
 	}
 
@@ -62,25 +78,27 @@ func Login(c *fiber.Ctx) error {
 	}
 
 	var user models.User
-	if err := database.DB.Where("username = ?", input.Username).First(&user).Error; err != nil {
-		return c.Status(401).JSON(fiber.Map{"error": "Invalid credentials"})
+	err := database.DB.Where("username = ? OR email = ?", input.Login, input.Login).First(&user).Error
+	if err != nil {
+		return c.Status(401).JSON(fiber.Map{"error": "User not found"})
 	}
 
 	// Check password
 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(input.Password)); err != nil {
-		return c.Status(401).JSON(fiber.Map{"error": "Invalid credentials"})
+		return c.Status(401).JSON(fiber.Map{"error": "Incorrect password"})
 	}
 
 	// Generate JWT
 	secret := os.Getenv("JWT_SECRET")
 	if secret == "" {
-		secret = "your-super-secret-key" // fallback
+		secret = "your-super-secret-key"
 	}
 
 	claims := jwt.MapClaims{
 		"user_id":  user.ID,
 		"username": user.Username,
-		"exp":      time.Now().Add(time.Hour * 24).Unix(), // 24 hours
+		"email":    user.Email,
+		"exp":      time.Now().Add(time.Hour * 24).Unix(),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -94,6 +112,7 @@ func Login(c *fiber.Ctx) error {
 		"user": fiber.Map{
 			"id":       user.ID,
 			"username": user.Username,
+			"email":    user.Email,
 		},
 	})
 }

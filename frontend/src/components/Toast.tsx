@@ -40,5 +40,5 @@ export default function Toast({ message, type, onClose }: ToastProps) {
                 </button>
             </div>
         </div>
-  );
+    );
 }

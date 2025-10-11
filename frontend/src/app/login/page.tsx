@@ -5,26 +5,36 @@ import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
 import { LogIn, AlertCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { AxiosError } from 'axios';
 
 export default function LoginPage() {
-    const [username, setUsername] = useState('');
+    const [login, setLogin] = useState(''); 
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const { login } = useAuth();
+    const { login: loginUser } = useAuth(); 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
-        setErrorMessage(null); // reset error setiap kali submit
+        setErrorMessage(null);
 
         const loadingToast = toast.loading('Logging in...');
 
         try {
-            await login(username, password);
+            await loginUser(login, password);
             toast.success('Login successful!', { id: loadingToast });
         } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : 'Login failed';
+            let message = 'Login failed';
+
+            // Kalau error dari Axios atau throw Error biasa
+            if (err instanceof Error) {
+                message = err.message;
+            } else if ((err as AxiosError)?.response) {
+                const error = err as AxiosError<{ message?: string }>;
+                message = error.response?.data?.message || error.message || message;
+            }
+
             setErrorMessage(message);
             toast.error(message, { id: loadingToast });
         } finally {
@@ -46,14 +56,14 @@ export default function LoginPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Username
+                            Username or Email
                         </label>
                         <input
                             type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={login}
+                            onChange={(e) => setLogin(e.target.value)}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                            placeholder="Enter your username"
+                            placeholder="Enter username or email"
                             required
                         />
                     </div>
