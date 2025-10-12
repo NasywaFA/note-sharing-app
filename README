@@ -127,46 +127,46 @@
 Overview image:
 
 Home page
-![public access](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/home.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/home.png)
 
 Login page
-![Login page](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/login_page.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/login_page.png)
 
 Register page
-![Register page](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/register_page.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/register_page.png)
 
 Notes private dashboard
-![Dashboard](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/dashboard.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/dashboard.png)
 
 Note public dashboard
-![Sharing Notes Dashboard](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/public_dashboard.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/public_dashboard.png)
 
 No notes or first time
-![No notes](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/no_data.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/no_data.png)
 
 Add new note
-![Add note](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/add_note.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/add_note.png)
 
 Add and crop image
-![Add and crop image](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/add_crop_image.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/add_crop_image.png)
 
 Note edit
-![edit](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/edit.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/edit.png)
 
 Delete note pop up
-![Delete pop up](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/delete_notification.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/delete_notification.png)
 
 Long note
-![Long note](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/long_note.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/long_note.png)
 
 Short note
-![Short note](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/short_note.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/short_note.png)
 
 Search for notes
-![Search for note](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/search.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/search.png)
 
 Log out pop up
-![Logout pop up](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/logout_pop_up.png)
+![Preview](https://github.com/NasywaFA/note-sharing-app/blob/main/frontend/public/overview/logout_pop_up.png)
 ---
 
 File [backend-log.txt](./backend-log.txt) to see backend logs.
