@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useAuth } from '@/context/AuthContext';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { FileText, Lock, Users, Globe } from 'lucide-react';
+import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { FileText, Lock, Users, Globe } from "lucide-react";
 
 export default function Home() {
   const { user, isLoading } = useAuth();
@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading && user) {
-      router.push('/dashboard');
+      router.push("/dashboard");
     }
   }, [user, isLoading, router]);
 
@@ -32,23 +32,15 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <FileText className="h-8 w-8 text-blue-600" />
-              <span className="ml-2 text-xl font-bold text-gray-900">NoteShare</span>
+              <span className="ml-2 text-xl font-bold text-gray-900">
+                NoteShare
+              </span>
             </div>
             <div className="flex gap-4">
               <Link href="/sharing">
                 <button className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition flex items-center gap-2">
                   <Globe className="h-4 w-4" />
                   Explore
-                </button>
-              </Link>
-              <Link href="/login">
-                <button className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition">
-                  Login
-                </button>
-              </Link>
-              <Link href="/register">
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                  Get Started
                 </button>
               </Link>
               <Link href="/login">
@@ -73,7 +65,8 @@ export default function Home() {
             Your Notes, Organized & Secure
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Create, manage, and share your notes effortlessly. Built with modern technology for the best experience.
+            Create, manage, and share your notes effortlessly. Built with modern
+            technology for the best experience.
           </p>
           <Link href="/register">
             <button className="px-8 py-4 bg-blue-600 text-white text-lg rounded-lg hover:bg-blue-700 transition shadow-lg hover:shadow-xl">
@@ -90,7 +83,8 @@ export default function Home() {
             </div>
             <h3 className="text-xl font-semibold mb-2">Easy Note Taking</h3>
             <p className="text-gray-600">
-              Create and edit notes with a simple, intuitive interface. Focus on your content, not the tool.
+              Create and edit notes with a simple, intuitive interface. Focus on
+              your content, not the tool.
             </p>
           </div>
 
@@ -100,7 +94,8 @@ export default function Home() {
             </div>
             <h3 className="text-xl font-semibold mb-2">Secure & Private</h3>
             <p className="text-gray-600">
-              Your notes are encrypted and protected. Only you can access your personal information.
+              Your notes are encrypted and protected. Only you can access your
+              personal information.
             </p>
           </div>
 
@@ -110,7 +105,8 @@ export default function Home() {
             </div>
             <h3 className="text-xl font-semibold mb-2">Personal Workspace</h3>
             <p className="text-gray-600">
-              Each user gets their own private workspace to organize notes their way.
+              Each user gets their own private workspace to organize notes their
+              way.
             </p>
           </div>
         </div>
