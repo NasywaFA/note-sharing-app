@@ -1,57 +1,51 @@
-notes-backend  | 17:21:10 | 200 |  715.557549ms | 172.18.0.1 | PUT | /api/notes/1 | -
-notes-backend  | 17:21:12 | 204 |      20.508µs | 172.18.0.1 | OPTIONS | /api/notes | -
-notes-backend  | 17:21:12 | 200 |  188.206009ms | 172.18.0.1 | GET | /api/notes | -
-notes-backend  | 17:21:23 | 204 |      13.087µs | 172.18.0.1 | OPTIONS | /api/notes/7 | -
-notes-backend  | 17:21:23 | 200 |   15.330126ms | 172.18.0.1 | DELETE | /api/notes/7 | -
-notes-backend  | 17:21:23 | 204 |      13.474µs | 172.18.0.1 | OPTIONS | /api/notes | -
+E:\note-sharing-app>docker-compose logs -f backend --tail 50
+notes-backend  | 2025/10/12 01:15:55 /app/database/db.go:23 SLOW SQL >= 200ms
+notes-backend  | [309.947ms] [rows:-] SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'notesdb' AND table_schema = CURRENT_SCHEMA() AND table_name = 'users'
+notes-backend  | 2025/10/12 01:15:56 Database connected successfully!
+notes-backend  | 2025/10/12 01:15:56 Server running on http://localhost:8080
 notes-backend  |
-notes-backend  | 2025/10/11 17:21:24 /app/handlers/notes.go:15 SLOW SQL >= 200ms
-notes-backend  | [373.014ms] [rows:5] SELECT * FROM "notes" WHERE user_id = 1 AND "notes"."deleted_at" IS NULL
-notes-backend  | 17:21:23 | 200 |  612.979309ms | 172.18.0.1 | GET | /api/notes | -
-notes-backend  | 17:21:30 | 204 |      13.427µs | 172.18.0.1 | OPTIONS | /api/notes/8 | -
-notes-backend  | 17:21:30 | 200 |    9.550308ms | 172.18.0.1 | DELETE | /api/notes/8 | -
-notes-backend  | 17:21:30 | 200 |  126.360191ms | 172.18.0.1 | GET | /api/notes | -
-notes-backend  | 17:24:28 | 204 |      17.845µs | 172.18.0.1 | OPTIONS | /api/notes/10 | -
-notes-backend  | 17:24:28 | 200 |   11.402036ms | 172.18.0.1 | PUT | /api/notes/10 | -
-notes-backend  | 17:24:28 | 204 |       14.52µs | 172.18.0.1 | OPTIONS | /api/notes | -
-notes-backend  | 17:24:28 | 200 |  288.133328ms | 172.18.0.1 | GET | /api/notes | -
-notes-backend  | 17:26:57 | 204 |     154.156µs | 172.18.0.1 | OPTIONS | /api/login | -
-notes-backend  | 17:26:57 | 200 |  174.959785ms | 172.18.0.1 | POST | /api/login | -
-notes-backend  | 17:26:58 | 204 |      45.883µs | 172.18.0.1 | OPTIONS | /api/notes | -
-notes-backend  | 17:26:58 | 200 |    1.289431ms | 172.18.0.1 | GET | /api/notes | -
-notes-backend  | 17:40:07 | 204 |      316.65µs | 172.18.0.1 | OPTIONS | /api/register | -
-notes-backend  | 17:41:55 | 204 |      11.829µs | 172.18.0.1 | OPTIONS | /api/register | -
-notes-backend  | 18:21:11 | 204 |    5.720002ms | 172.18.0.1 | OPTIONS | /api/register | -
-notes-backend  | 18:21:11 | 409 |   89.251919ms | 172.18.0.1 | POST | /api/register | -
-notes-backend  | 18:21:17 | 204 |      15.062µs | 172.18.0.1 | OPTIONS | /api/register | -
+notes-backend  |  ┌───────────────────────────────────────────────────┐
+notes-backend  |  │                   Fiber v2.52.9                   │
+notes-backend  |  │               http://127.0.0.1:8080               │
+notes-backend  |  │       (bound on host 0.0.0.0 and port 8080)       │
+notes-backend  |  │                                                   │
+notes-backend  |  │ Handlers ............ 17  Processes ........... 1 │
+notes-backend  |  │ Prefork ....... Disabled  PID ................. 1 │
+notes-backend  |  └───────────────────────────────────────────────────┘
 notes-backend  |
-notes-backend  | 2025/10/11 18:21:17 /app/handlers/auth.go:41 record not found
-notes-backend  | [2.349ms] [rows:0] SELECT * FROM "users" WHERE username = 'nanas' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
-notes-backend  | 18:21:17 | 409 |    6.742891ms | 172.18.0.1 | POST | /api/register | -
-notes-backend  | 18:21:23 | 204 |    1.926661ms | 172.18.0.1 | OPTIONS | /api/register | -
-notes-backend  |
-notes-backend  | 2025/10/11 18:21:23 /app/handlers/auth.go:41 record not found
-notes-backend  | [2.062ms] [rows:0] SELECT * FROM "users" WHERE username = 'nanas' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
-notes-backend  |
-notes-backend  | 2025/10/11 18:21:23 /app/handlers/auth.go:46 record not found
-notes-backend  | [2.987ms] [rows:0] SELECT * FROM "users" WHERE email = 'tes@gmail.com' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
-notes-backend  | 18:21:23 | 200 |  106.807925ms | 172.18.0.1 | POST | /api/register | -
-notes-backend  | 18:21:23 | 204 |     103.045µs | 172.18.0.1 | OPTIONS | /api/login | -
-notes-backend  | 18:21:23 | 200 |   85.115571ms | 172.18.0.1 | POST | /api/login | -
-notes-backend  | 18:21:54 | 204 |      64.188µs | 172.18.0.1 | OPTIONS | /api/login | -
-notes-backend  | 18:21:54 | 200 |   77.040304ms | 172.18.0.1 | POST | /api/login | -
-notes-backend  | 18:21:54 | 204 |      12.353µs | 172.18.0.1 | OPTIONS | /api/notes | -
-notes-backend  | 18:21:54 | 200 |    3.277194ms | 172.18.0.1 | GET | /api/notes | -
-notes-backend  | 18:22:29 | 204 |     276.479µs | 172.18.0.1 | OPTIONS | /api/login | -
-notes-backend  | 18:22:29 | 200 |  224.906596ms | 172.18.0.1 | POST | /api/login | -
-notes-backend  | 18:22:30 | 204 |      13.547µs | 172.18.0.1 | OPTIONS | /api/notes | -
-notes-backend  |
-notes-backend  | 2025/10/11 18:22:30 /app/handlers/notes.go:15 SLOW SQL >= 200ms
-notes-backend  | [244.728ms] [rows:4] SELECT * FROM "notes" WHERE user_id = 1 AND "notes"."deleted_at" IS NULL
-notes-backend  | 18:22:30 | 200 |  305.056336ms | 172.18.0.1 | GET | /api/notes | -
-notes-backend  | 18:50:45 | 204 |    1.145663ms | 172.18.0.1 | OPTIONS | /api/notes | -
-notes-backend  |
-notes-backend  | 2025/10/11 18:50:46 /app/handlers/notes.go:15 SLOW SQL >= 200ms
-notes-backend  | [857.979ms] [rows:4] SELECT * FROM "notes" WHERE user_id = 1 AND "notes"."deleted_at" IS NULL
-notes-backend  | 18:50:45 | 200 |  1.109292371s | 172.18.0.1 | GET | /api/notes | -
-notes-backend  | 2025/10/11 19:20:03 Database connected successfully!
+notes-backend  | [12-Oct-2025 01:22:31] OPTIONS /api/notes - 204
+notes-backend  | [12-Oct-2025 01:22:32] GET /api/notes - 200
+notes-backend  | [12-Oct-2025 01:23:57] OPTIONS /api/notes - 204
+notes-backend  | [12-Oct-2025 01:23:57] POST /api/notes - 201
+notes-backend  | [12-Oct-2025 01:23:57] GET /api/notes - 200
+notes-backend  | [12-Oct-2025 01:24:11] OPTIONS /api/notes - 204
+notes-backend  | [12-Oct-2025 01:24:11] POST /api/notes - 201
+notes-backend  | [12-Oct-2025 01:24:11] GET /api/notes - 200
+notes-backend  | [12-Oct-2025 01:25:12] OPTIONS /api/notes - 204
+notes-backend  | [12-Oct-2025 01:25:12] POST /api/notes - 201
+notes-backend  | [12-Oct-2025 01:25:12] GET /api/notes - 200
+notes-backend  | [12-Oct-2025 01:25:15] OPTIONS /api/public/notes - 204
+notes-backend  | [12-Oct-2025 01:25:15] GET /api/public/notes - 200
+notes-backend  | [12-Oct-2025 01:25:30] OPTIONS /api/login - 204
+notes-backend  | [12-Oct-2025 01:25:30] POST /api/login - 200
+notes-backend  | [12-Oct-2025 01:25:30] OPTIONS /api/notes - 204
+notes-backend  | [12-Oct-2025 01:25:31] GET /api/notes - 200
+notes-backend  | [12-Oct-2025 01:26:15] OPTIONS /api/notes/3 - 204
+notes-backend  | [12-Oct-2025 01:26:15] PUT /api/notes/3 - 200
+notes-backend  | [12-Oct-2025 01:26:15] OPTIONS /api/notes - 204
+notes-backend  | [12-Oct-2025 01:26:15] GET /api/notes - 200
+notes-backend  | [12-Oct-2025 01:26:18] OPTIONS /api/public/notes - 204
+notes-backend  | [12-Oct-2025 01:26:18] GET /api/public/notes - 200
+notes-backend  | [12-Oct-2025 01:26:30] OPTIONS /api/notes - 204
+notes-backend  | [12-Oct-2025 01:26:30] GET /api/notes - 200
+notes-backend  | [12-Oct-2025 01:26:54] OPTIONS /api/login - 204
+notes-backend  | [12-Oct-2025 01:26:54] POST /api/login - 200
+notes-backend  | [12-Oct-2025 01:26:54] OPTIONS /api/notes - 204
+notes-backend  | [12-Oct-2025 01:26:54] GET /api/notes - 200
+notes-backend  | [12-Oct-2025 01:26:59] OPTIONS /api/public/notes - 204
+notes-backend  | [12-Oct-2025 01:26:59] GET /api/public/notes - 200
+notes-backend  | [12-Oct-2025 01:27:01] GET /api/notes - 200
+notes-backend  | [12-Oct-2025 01:27:41] OPTIONS /api/notes/22 - 204
+notes-backend  | [12-Oct-2025 01:27:41] PUT /api/notes/22 - 200
+notes-backend  | [12-Oct-2025 01:27:41] OPTIONS /api/notes - 204
+notes-backend  | [12-Oct-2025 01:27:41] GET /api/notes - 200
