@@ -126,19 +126,20 @@
 
 Overview image:
 
-![Add and crop image](frontend/public/overvie/add_crop_image.png)
-![Add note](frontend/public/overvie/add_note.png)
-![Dashboard](frontend/public/overvie/dashboard.png)
-![edit](frontend/public/overvie/edit.png)
-![Delete pop up](frontend/public/overvie/delete_notification.png)
-![Login page](frontend/public/overvie/login_page.png)
-![Logout pop up](frontend/public/overvie/logout_pop_up.png)
-![Long note](frontend/public/overvie/long_note.png)
-![No notes](frontend/public/overvie/no_data.png)
-![Sharing Notes Dashboard](frontend/public/overvie/public_dashboard.png)
-![Register page](frontend/public/overvie/register_page.png)
-![Search for note](frontend/public/overvie/search.png)
-![Short note](frontend/public/overvie/short_note.png)
+![public access](frontend/public/overview/home.png)
+![Add and crop image](frontend/public/overview/add_crop_image.png)
+![Add note](frontend/public/overview/add_note.png)
+![Dashboard](frontend/public/overview/dashboard.png)
+![edit](frontend/public/overview/edit.png)
+![Delete pop up](frontend/public/overview/delete_notification.png)
+![Login page](frontend/public/overview/login_page.png)
+![Logout pop up](frontend/public/overview/logout_pop_up.png)
+![Long note](frontend/public/overview/long_note.png)
+![No notes](frontend/public/overview/no_data.png)
+![Sharing Notes Dashboard](frontend/public/overview/public_dashboard.png)
+![Register page](frontend/public/overview/register_page.png)
+![Search for note](frontend/public/overview/search.png)
+![Short note](frontend/public/overview/short_note.png)
 
 ---
 
