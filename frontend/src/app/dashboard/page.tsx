@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { notesAPI, Note } from '@/lib/api';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import Navbar from '@/components/Navbar'; 
 import NoteCard from '@/components/NoteCard';
 import NoteModal from '@/components/NoteModal';
 import NoteDetailModal from '@/components/NoteDetailModal';
 import LogoutModal from '@/components/LogoutModal';
-import { Plus, LogOut, Search, FileText } from 'lucide-react';
+import { Plus, LogOut, Search, FileText, Link, Globe, Lock } from 'lucide-react';
 import NoteSkeleton from '@/components/NoteSkeleton';
 import toast from 'react-hot-toast';
 
@@ -61,19 +62,19 @@ function DashboardContent() {
     }, [searchQuery, notes]);
 
     // Save note (create/update)
-    const handleSaveNote = async (title: string, content: string, imageURL?: string) => {
+    const handleSaveNote = async (title: string, content: string, imageURL?: string, isPublic?: boolean) => {
         const loadingToast = toast.loading(editingNote ? 'Updating note...' : 'Creating note...');
+
         try {
             if (editingNote) {
-                await notesAPI.update(editingNote.ID, title, content, imageURL);
-                toast.success('Note updated successfully!', { id: loadingToast });
+                await notesAPI.update(editingNote.ID, title, content, imageURL, isPublic);
+                toast.success('Note updated successfully! ✅', { id: loadingToast });
             } else {
-                await notesAPI.create(title, content, imageURL);
-                toast.success('Note created successfully!', { id: loadingToast });
+                await notesAPI.create(title, content, imageURL, isPublic);
+                toast.success('Note created successfully! 🎉', { id: loadingToast });
             }
             await fetchNotes();
             setEditingNote(null);
-            setIsModalOpen(false);
         } catch (error) {
             console.error('Failed to save note:', error);
             toast.error('Failed to save note', { id: loadingToast });
@@ -145,29 +146,8 @@ function DashboardContent() {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Navbar */}
-            <nav className="bg-[#74baa2] shadow-sm sticky top-0 z-40">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center h-16">
-                        <div className="flex items-center">
-                            <FileText className="h-8 w-8" />
-                            <span className="ml-2 text-xl font-bold text-gray-900">NoteShare</span>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <span className="text-gray-900 font-medium">
-                                Welcome, <span className="text-gray-900">{user?.username}</span>
-                            </span>
-                            <button
-                                onClick={handleLogoutClick}
-                                className="flex items-center gap-2 px-4 py-2 bg-red-600 text-grey-50 hover:bg-red-900 rounded-lg transition"
-                            >
-                                <LogOut className="h-4 w-4" />
-                                Logout
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
+            <Navbar />
+            
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Header */}
@@ -250,6 +230,43 @@ function DashboardContent() {
                             <Plus className="h-5 w-5" />
                             {notes.length === 0 ? 'Create Your First Note' : 'Search Again'}
                         </button>
+                    </div>
+                )}
+
+                {/* Stats */}
+                {!isLoading && notes.length > 0 && (
+                    <div className="grid grid-cols-3 gap-4 mb-8">
+                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p className="text-sm text-gray-600">Total Notes</p>
+                                    <p className="text-2xl font-bold text-gray-900">{notes.length}</p>
+                                </div>
+                                <FileText className="h-8 w-8 text-blue-600" />
+                            </div>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p className="text-sm text-gray-600">Public Notes</p>
+                                    <p className="text-2xl font-bold text-green-700">
+                                        {notes.filter(n => n.is_public).length}
+                                    </p>
+                                </div>
+                                <Globe className="h-8 w-8 text-green-600" />
+                            </div>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p className="text-sm text-gray-600">Private Notes</p>
+                                    <p className="text-2xl font-bold text-gray-700">
+                                        {notes.filter(n => !n.is_public).length}
+                                    </p>
+                                </div>
+                                <Lock className="h-8 w-8 text-gray-600" />
+                            </div>
+                        </div>
                     </div>
                 )}
 

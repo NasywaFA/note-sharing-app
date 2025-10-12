@@ -7,6 +7,7 @@ type Note struct {
     Title    string `gorm:"not null" json:"title"`
     Content  string `gorm:"type:text" json:"content"`
     ImageURL string `gorm:"type:text" json:"image_url"`
+    IsPublic bool   `gorm:"default:false" json:"is_public"`
     UserID   uint   `gorm:"not null" json:"user_id"`
-    User     User   `gorm:"foreignKey:UserID" json:"-"`
+    User     User   `gorm:"foreignKey:UserID" json:"user,omitempty"`
 }

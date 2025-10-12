@@ -44,6 +44,9 @@ func main() {
 	api.Post("/register", handlers.Register)
 	api.Post("/login", handlers.Login)
 
+	api.Get("/public/notes", handlers.GetPublicNotes)
+	api.Get("/public/notes/:id", handlers.GetPublicNote)
+
 	// Notes routes (protected)
 	notes := api.Group("/notes")
 	notes.Use(middleware.AuthMiddleware)
@@ -52,6 +55,8 @@ func main() {
 	notes.Post("/", handlers.CreateNote)      // Create note
 	notes.Put("/:id", handlers.UpdateNote)    // Update note
 	notes.Delete("/:id", handlers.DeleteNote) // Delete note
+
+	log.Println("Server running on http://localhost:8080")
 
 	// Start server
 	log.Fatal(app.Listen(":8080"))

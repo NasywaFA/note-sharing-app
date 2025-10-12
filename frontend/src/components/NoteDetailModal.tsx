@@ -1,7 +1,7 @@
 'use client';
 
 import { Note } from '@/lib/api';
-import { X, Pencil, Trash2, Calendar } from 'lucide-react';
+import { X, Pencil, Trash2, Calendar, Globe, Lock, Image as ImageIcon } from 'lucide-react';
 
 interface NoteDetailModalProps {
     note: Note | null;
@@ -9,6 +9,7 @@ interface NoteDetailModalProps {
     onClose: () => void;
     onEdit: (note: Note) => void;
     onDelete: (id: number) => void;
+    isReadOnly?: boolean;
 }
 
 export default function NoteDetailModal({ 
@@ -16,7 +17,8 @@ export default function NoteDetailModal({
     isOpen, 
     onClose, 
     onEdit, 
-    onDelete 
+    onDelete,
+    isReadOnly = false
 }: NoteDetailModalProps) {
     if (!isOpen || !note) return null;
 
@@ -42,28 +44,55 @@ export default function NoteDetailModal({
     };
 
     return (
-        <div className="fixed inset-0 backdrop-blur-sm  flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
+                
                 {/* Header */}
                 <div className="flex justify-between items-center p-6 border-b border-gray-200">
-                    <h2 className="text-2xl font-bold text-gray-900 flex-1 pr-4">
-                        {note.title}
-                    </h2>
+                    <div className="flex-1 pr-4">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                            {note.title}
+                        </h2>
+
+                        {/* Author info (only show in read-only mode/public) */}
+                        {isReadOnly && note.user && (
+                            <div className="flex items-center gap-2 text-sm text-gray-600">
+                                <div className="bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center">
+                                    <span className="text-blue-600 font-semibold">
+                                        {note.user.username.charAt(0).toUpperCase()}
+                                    </span>
+                                </div>
+                                <span className="font-medium">{note.user.username}</span>
+                                {note.user.email && (
+                                    <>
+                                        <span className="text-gray-400">•</span>
+                                        <span>{note.user.email}</span>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </div>
+
                     <div className="flex items-center gap-2">
-                        <button
-                            onClick={handleEdit}
-                            className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition"
-                            title="Edit note"
-                        >
-                            <Pencil className="h-5 w-5" />
-                        </button>
-                        <button
-                            onClick={handleDelete}
-                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
-                            title="Delete note"
-                        >
-                            <Trash2 className="h-4 w-4 text-red-custom" />
-                        </button>
+                        {/* Edit/Delete if nor read-only */}
+                        {!isReadOnly && (
+                            <>
+                                <button
+                                    onClick={handleEdit}
+                                    className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition"
+                                    title="Edit note"
+                                >
+                                    <Pencil className="h-5 w-5" />
+                                </button>
+                                <button
+                                    onClick={handleDelete}
+                                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+                                    title="Delete note"
+                                >
+                                    <Trash2 className="h-5 w-5" />
+                                </button>
+                            </>
+                        )}
                         <button
                             onClick={onClose}
                             className="p-2 hover:bg-gray-100 rounded-lg transition ml-2"
@@ -77,14 +106,14 @@ export default function NoteDetailModal({
                 <div className="flex-1 overflow-y-auto p-6">
                     {/* Image */}
                     {note.image_url && (
-                    <div className="mb-6">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                            src={note.image_url}
-                            alt={note.title}
-                            className="w-full rounded-lg border border-gray-200"
-                        />
-                    </div>
+                        <div className="mb-6">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src={note.image_url}
+                                alt={note.title}
+                                className="w-full rounded-lg border border-gray-200"
+                            />
+                        </div>
                     )}
 
                     {/* Note Content */}
@@ -99,13 +128,39 @@ export default function NoteDetailModal({
                 <div className="p-6 border-t border-gray-200 bg-gray-50">
                     <div className="flex items-center justify-between text-sm text-gray-600">
                         <div className="flex items-center gap-4">
+                            {/* Created date */}
                             <div className="flex items-center">
                                 <Calendar className="h-4 w-4 mr-1" />
                                 <span>Created: {formatDate(note.CreatedAt)}</span>
                             </div>
+
+                            {/* Updated date */}
                             {note.UpdatedAt !== note.CreatedAt && (
                                 <div className="flex items-center">
                                     <span>Updated: {formatDate(note.UpdatedAt)}</span>
+                                </div>
+                            )}
+
+                            {/* Public/private status (hide in public view mode) */}
+                            {!isReadOnly && (
+                                <div
+                                    className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${
+                                        note.is_public
+                                            ? 'bg-green-100 text-green-700'
+                                            : 'bg-gray-100 text-gray-700'
+                                    }`}
+                                >
+                                    {note.is_public ? (
+                                        <>
+                                            <Globe className="h-3 w-3" />
+                                            Public
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Lock className="h-3 w-3" />
+                                            Private
+                                        </>
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -114,4 +169,4 @@ export default function NoteDetailModal({
             </div>
         </div>
     );
-} 
+}

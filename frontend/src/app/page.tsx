@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { FileText, Lock, Users } from 'lucide-react';
+import { FileText, Lock, Users, Globe } from 'lucide-react';
 
 export default function Home() {
   const { user, isLoading } = useAuth();
@@ -35,6 +35,22 @@ export default function Home() {
               <span className="ml-2 text-xl font-bold text-gray-900">NoteShare</span>
             </div>
             <div className="flex gap-4">
+              <Link href="/sharing">
+                <button className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition flex items-center gap-2">
+                  <Globe className="h-4 w-4" />
+                  Explore
+                </button>
+              </Link>
+              <Link href="/login">
+                <button className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition">
+                  Login
+                </button>
+              </Link>
+              <Link href="/register">
+                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                  Get Started
+                </button>
+              </Link>
               <Link href="/login">
                 <button className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition">
                   Login

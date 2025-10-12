@@ -29,7 +29,8 @@ export interface Note {
     title: string;
     content: string;
     image_url?: string;
-    user_id: number;
+    is_public: boolean
+    user?: User; 
     CreatedAt: string;
     UpdatedAt: string;
 }
@@ -63,26 +64,38 @@ export const notesAPI = {
         return response.data;
     },
 
-    create: async (title: string, content: string, imageURL?: string): Promise<Note> => {
-        const response = await api.post<Note>('/notes', {
-            title,
+    create: async (title: string, content: string, imageURL?: string, isPublic?: boolean): Promise<Note> => {
+        const response = await api.post<Note>('/notes', { 
+            title, 
             content,
             image_url: imageURL || '',
+            is_public: isPublic || false
         });
         return response.data;
     },
 
-    update: async (id: number, title: string, content: string, imageURL?: string): Promise<Note> => {
-        const response = await api.put<Note>(`/notes/${id}`, {
-            title,
+    update: async (id: number, title: string, content: string, imageURL?: string, isPublic?: boolean): Promise<Note> => {
+        const response = await api.put<Note>(`/notes/${id}`, { 
+            title, 
             content,
             image_url: imageURL || '',
+            is_public: isPublic || false
         });
         return response.data;
     },
 
     delete: async (id: number): Promise<void> => {
         await api.delete(`/notes/${id}`);
+    },
+
+    getPublicNotes: async (): Promise<Note[]> => {
+        const response = await api.get<Note[]>('/public/notes');
+        return response.data;
+    },
+
+    getPublicNoteById: async (id: number): Promise<Note> => {
+        const response = await api.get<Note>(`/public/notes/${id}`);
+        return response.data;
     },
 };
 

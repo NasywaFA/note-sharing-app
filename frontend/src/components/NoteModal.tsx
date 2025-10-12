@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { X, Upload, Image as ImageIcon } from 'lucide-react';
+import { Lock, Globe } from "lucide-react";
 import { Note } from '@/lib/api';
 import ImageCropper from './ImageCropper';
 import toast from 'react-hot-toast';
@@ -9,7 +10,7 @@ import toast from 'react-hot-toast';
 interface NoteModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onSave: (title: string, content: string, imageURL?: string) => Promise<void>;
+    onSave: (title: string, content: string, imageURL?: string, isPublic?: boolean) => Promise<void>;
     note?: Note | null;
 }
 
@@ -18,6 +19,7 @@ export default function NoteModal({ isOpen, onClose, onSave, note }: NoteModalPr
     const [content, setContent] = useState('');
     const [imageURL, setImageURL] = useState('');
     const [imagePreview, setImagePreview] = useState<string>('');
+    const [isPublic, setIsPublic] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     // Cropper states
@@ -30,11 +32,13 @@ export default function NoteModal({ isOpen, onClose, onSave, note }: NoteModalPr
             setContent(note.content);
             setImageURL(note.image_url || '');
             setImagePreview(note.image_url || '');
+            setIsPublic(note.is_public || false);
         } else {
             setTitle('');
             setContent('');
             setImageURL('');
             setImagePreview('');
+            setIsPublic(false);
         }
     }, [note]);
 
@@ -85,11 +89,12 @@ export default function NoteModal({ isOpen, onClose, onSave, note }: NoteModalPr
         e.preventDefault();
         setIsLoading(true);
         try {
-            await onSave(title, content, imageURL);
+            await onSave(title, content, imageURL, isPublic);
             setTitle('');
             setContent('');
             setImageURL('');
             setImagePreview('');
+            setIsPublic(false);
             onClose();
         } catch (error) {
             console.error('Failed to save note:', error);
@@ -130,6 +135,44 @@ export default function NoteModal({ isOpen, onClose, onSave, note }: NoteModalPr
                                     required
                                     autoFocus
                                 />
+                            </div>
+
+                            {/* Public/Private Toggle ← TAMBAHIN INI */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Visibility
+                                </label>
+                                <div className="flex gap-3">
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsPublic(false)}
+                                        className={`flex-1 px-4 py-3 rounded-lg border-2 transition flex items-center justify-center gap-2 ${
+                                            !isPublic
+                                            ? 'border-blue-500 bg-blue-50 text-blue-700'
+                                            : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                                        }`}
+                                    >
+                                        <Lock className="h-5 w-5" />
+                                        <span className="font-medium">Private</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsPublic(true)}
+                                        className={`flex-1 px-4 py-3 rounded-lg border-2 transition flex items-center justify-center gap-2 ${
+                                            isPublic
+                                            ? 'border-green-500 bg-green-50 text-green-700'
+                                            : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                                        }`}
+                                    >
+                                        <Globe className="h-5 w-5" />
+                                        <span className="font-medium">Public</span>
+                                    </button>
+                                </div>
+                                <p className="text-xs text-gray-500 mt-2">
+                                    {isPublic 
+                                        ? 'This note will be visible to everyone in the Sharing page'
+                                        : 'Only you can see this note'}
+                                </p>
                             </div>
 
                             {/* Image Upload */}
