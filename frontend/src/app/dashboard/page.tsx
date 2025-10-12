@@ -68,10 +68,10 @@ function DashboardContent() {
         try {
             if (editingNote) {
                 await notesAPI.update(editingNote.ID, title, content, imageURL, isPublic);
-                toast.success('Note updated successfully! ✅', { id: loadingToast });
+                toast.success('Note updated successfully!', { id: loadingToast });
             } else {
                 await notesAPI.create(title, content, imageURL, isPublic);
-                toast.success('Note created successfully! 🎉', { id: loadingToast });
+                toast.success('Note created successfully!', { id: loadingToast });
             }
             await fetchNotes();
             setEditingNote(null);

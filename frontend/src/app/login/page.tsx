@@ -27,7 +27,6 @@ export default function LoginPage() {
         } catch (err: unknown) {
             let message = 'Login failed';
 
-            // Kalau error dari Axios atau throw Error biasa
             if (err instanceof Error) {
                 message = err.message;
             } else if ((err as AxiosError)?.response) {

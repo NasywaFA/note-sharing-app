@@ -1,7 +1,7 @@
 'use client';
 
 import { Note } from '@/lib/api';
-import { X, Pencil, Trash2, Calendar, Globe, Lock, Image as ImageIcon } from 'lucide-react';
+import { X, Pencil, Trash2, Calendar, Globe, Lock } from 'lucide-react';
 
 interface NoteDetailModalProps {
     note: Note | null;
