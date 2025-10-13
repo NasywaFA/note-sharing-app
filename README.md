@@ -2,7 +2,7 @@
 
 ## Stack: Go (Fiber, GORM, JWT) + PostgreSQL + Next.js
 
-# 0️ Environment variables
+# 1 Environment variables
 
     DB_HOST=postgres
     DB_USER=postgres
@@ -13,7 +13,7 @@
 
 ---
 
-# 1 How to run database (PostgreSQL)
+# 2 How to run database (PostgreSQL)
 
     Start all services in detached mode:
         docker-compose up -d
@@ -45,7 +45,7 @@
 
 ---
 
-# 2 How to run backend
+# 3 How to run backend
 
     Run backend:
         cd backend
@@ -59,7 +59,7 @@
 
 ---
 
-# 3️ How to run frontend
+# 4 How to run frontend
 
     run frontend:
         cd frontend
@@ -76,7 +76,7 @@
 
 ## ⚠️ Note: The frontend is also connected to the backend via the Docker network.
 
-# 4️ Viewing logs (live)
+# 5 Viewing logs (live)
 
     Backend logs:
         docker-compose logs -f backend
@@ -93,7 +93,7 @@
 
 ---
 
-# 5 API Endpoints
+# 6 API Endpoints
 
     POST /api/register      → Register new user
     POST /api/login         → Login user
@@ -104,7 +104,7 @@
 
 ---
 
-# 6 Additional tips
+# 7 Additional tips
 
     Check ports in use:
         netstat -ano | findstr :<port_number>
@@ -124,7 +124,7 @@
 
 ---
 
-Overview image:
+# 8 Overview image:
 
 Home page
 ![home](overview/home.png)
