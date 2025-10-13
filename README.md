@@ -1,6 +1,6 @@
-# Notes Sharing App
+#3 Notes Sharing App
 
-## Stack: Go (Fiber, GORM, JWT) + PostgreSQL + Next.js
+# Stack: Go (Fiber, GORM, JWT) + PostgreSQL + Next.js
 
 # 1 Environment variables
 
@@ -74,7 +74,7 @@
 
 ---
 
-## ⚠️ Note: The frontend is also connected to the backend via the Docker network.
+ ⚠️ Note: The frontend is also connected to the backend via the Docker network.
 
 # 5 Viewing logs (live)
 
@@ -127,43 +127,43 @@
 # 8 Overview image:
 
 Home page
-![home](overview/home.png)
+![home](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/home.png)
 
 Login page
-![login page](overview/login_page.png)
+![login page](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/login_page.png)
 
 Register page
-![register page](overview/register_page.png)
+![register page](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/register_page.png)
 
 Notes private dashboard
-![private dashboard](overview/dashboard.png)
+![private dashboard](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/dashboard.png)
 
 Note public dashboard
-![public dashboard](overview/public_dashboard.png)
+![public dashboard](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/public_dashboard.png)
 
 No notes or first time
-![no notes](overview/no_data.png)
+![no notes](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/no_data.png)
 
 Add new note
-![add new note](overview/add_note.png)
+![add new note](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/add_note.png)
 
 Add and crop image
-![add crop image](overview/add_crop_image.png)
+![add crop image](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/add_crop_image.png)
 
 Note edit
-![edit](overview/edit.png)
+![edit](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/edit.png)
 
 Delete note pop up
-![delete notification](overview/delete_notification.png)
+![delete notification](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/delete_notification.png)
 
 Long note
-![long note](overview/long_note.png)
+![long note](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/long_note.png)
 
 Short note
-![short note](overview/short_note.png)
+![short note](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/short_note.png)
 
 Search for notes
-![search bar](overview/search.png)
+![search bar](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/search.png)
 
 Log out pop up
 ![log out pop up](overview/logout_pop_up.png)
