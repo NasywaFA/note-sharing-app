@@ -129,9 +129,44 @@ Overview image:
 Home page
 ![home](overview/home.png)
 
-#
 Login page
 ![login page](overview/login_page.png)
+
+Register page
+![register page](overview/register_page.png)
+
+Notes private dashboard
+![private dashboard](overview/dashboard.png)
+
+Note public dashboard
+![public dashboard](overview/public_dashboard.png)
+
+No notes or first time
+![no notes](overview/no_data.png)
+
+Add new note
+![add new note](overview/add_note.png)
+
+Add and crop image
+![add crop image](overview/add_crop_image.png)
+
+Note edit
+![edit](overview/edit.png)
+
+Delete note pop up
+![delete notification](overview/delete_notification.png)
+
+Long note
+![long note](overview/long_note.png)
+
+Short note
+![short note](overview/short_note.png)
+
+Search for notes
+![search bar](overview/search.png)
+
+Log out pop up
+![log out pop up](overview/logout_pop_up.png)
 ---
 
 File [backend-log.txt](https://github.com/NasywaFA/note-sharing-app/blob/main/backend-log.txt) to see backend logs.
