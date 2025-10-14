@@ -11,8 +11,6 @@
     DB_PORT=5432
     JWT_SECRET=11092708
 
----
-
 # 2 How to run database (PostgreSQL)
 
     Start all services in detached mode:
@@ -42,8 +40,6 @@
 
     Exit psql:
         \q
-
----
 
 # 3 How to run backend
 
@@ -76,6 +72,8 @@
 
  ⚠️ Note: The frontend is also connected to the backend via the Docker network.
 
+---
+
 # 5 Viewing logs (live)
 
     Backend logs:
@@ -101,8 +99,6 @@
     POST /api/notes         → Create note
     PUT /api/notes/:id      → Update note
     DELETE /api/notes/:id   → Delete note
-
----
 
 # 7 Additional tips
 
