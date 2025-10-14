@@ -134,10 +134,10 @@
   <img src="overview/long_note.png" width="250">
   <img src="overview/edit.png" width="250">
   <img src="overview/login_page.png" width="250">
-  <img src="overview/delete_notification.png" width="250">
-  <img src="overview/no_data.png" width="250">
   <img src="overview/add_note.png" width="250">
   <img src="overview/add_crop_image.png" width="250">
+  <img src="overview/delete_notification.png" width="250">
+  <img src="overview/no_data.png" width="250">
   <img src="overview/short_note.png" width="250">
   <img src="overview/search.png" width="250">
   <img src="overview/logout_pop_up.png" width="250">
