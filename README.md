@@ -1,4 +1,4 @@
-#3 Notes Sharing App
+### Notes Sharing App
 
 # Stack: Go (Fiber, GORM, JWT) + PostgreSQL + Next.js
 
