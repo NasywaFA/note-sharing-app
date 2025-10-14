@@ -124,37 +124,24 @@
 
 ---
 
-# 8 Overview image:
+# 8 Overview image
 
-Home page
-![home](overview/home.png)
+<p align="center">
+  <img src="overview/home.png" width="250">
+  <img src="overview/register_page.png" width="250">
+  <img src="overview/login_page.png" width="250">
+  <img src="overview/dashboard.png" width="250">
+  <img src="overview/public_dashboard.png" width="250">
+  <img src="overview/no_data.png" width="250">
+  <img src="overview/add_note.png" width="250">
+  <img src="overview/add_crop_image.png" width="250">
+  <img src="overview/edit.png" width="250">
+  <img src="overview/delete_notification.png" width="250">
+  <img src="overview/long_note.png" width="250">
+  <img src="overview/short_note.png" width="250">
+  <img src="overview/search.png" width="250">
+</p>
 
-Login page
-![login page](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/login_page.png)
-
-Register page
-![register page](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/register_page.png)
-
-Notes private dashboard
-![private dashboard](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/dashboard.png)
-
-Note public dashboard
-![public dashboard](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/public_dashboard.png)
-
-No notes or first time
-![no notes](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/no_data.png)
-
-Add new note
-![add new note](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/add_note.png)
-
-Add and crop image
-![add crop image](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/add_crop_image.png)
-
-Note edit
-![edit](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/edit.png)
-
-Delete note pop up
-![delete notification](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/delete_notification.png)
 
 Long note
 ![long note](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/long_note.png)
