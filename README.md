@@ -128,32 +128,21 @@
 
 <p align="center">
   <img src="overview/home.png" width="250">
-  <img src="overview/register_page.png" width="250">
-  <img src="overview/login_page.png" width="250">
   <img src="overview/dashboard.png" width="250">
   <img src="overview/public_dashboard.png" width="250">
+  <img src="overview/register_page.png" width="250">
+  <img src="overview/long_note.png" width="250">
+  <img src="overview/edit.png" width="250">
+  <img src="overview/login_page.png" width="250">
+  <img src="overview/delete_notification.png" width="250">
   <img src="overview/no_data.png" width="250">
   <img src="overview/add_note.png" width="250">
   <img src="overview/add_crop_image.png" width="250">
-  <img src="overview/edit.png" width="250">
-  <img src="overview/delete_notification.png" width="250">
-  <img src="overview/long_note.png" width="250">
   <img src="overview/short_note.png" width="250">
   <img src="overview/search.png" width="250">
+  <img src="overview/logout_pop_up.png" width="250">
 </p>
 
-
-Long note
-![long note](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/long_note.png)
-
-Short note
-![short note](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/short_note.png)
-
-Search for notes
-![search bar](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/search.png)
-
-Log out pop up
-![log out pop up](overview/logout_pop_up.png)
 ---
 
 File [backend-log.txt](https://github.com/NasywaFA/note-sharing-app/blob/main/backend-log.txt) to see backend logs.
