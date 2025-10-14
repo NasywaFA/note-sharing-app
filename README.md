@@ -127,7 +127,7 @@
 # 8 Overview image:
 
 Home page
-![home](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/home.png)
+![home](overview/home.png)
 
 Login page
 ![login page](https://raw.githubusercontent.com/NasywaFA/note-sharing-app/main/overview/login_page.png)
